@@ -57,6 +57,9 @@ mat-card-subtitle {
 .map-container {
   flex: 1 1 auto;
   height: 60vh; 
+  min-height: 400px;
+  width: 100%;
+  display: block;
   border-radius: 0 0 1rem 1rem;
   overflow: hidden;
 }

@@ -22,11 +22,5 @@
     </button>
   </mat-card-content>
 
-  <div
-    #leafletContainer
-    leaflet
-    (leafletMapReady)="onMapReady($event)"
-    [leafletOptions]="leafletOptions"
-    class="map-container"
-  ></div>
+<div #leafletContainer class="map-container"></div>
 </mat-card>

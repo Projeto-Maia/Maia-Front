@@ -1,28 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import {
-  MapOptions,
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  Map as LeafletMap,
   latLng,
   tileLayer,
   marker,
   icon,
   Marker,
-  Map as LeafletMap,
   LatLngBounds,
 } from 'leaflet';
+import * as L from 'leaflet';
+
 import { ApiService, Location } from '../../../core/services/api.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-map-page',
   standalone: true,
   imports: [
     CommonModule,
-    LeafletModule,
     MatCardModule,
     MatListModule,
     MatButtonModule,
@@ -31,13 +36,15 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.scss'],
 })
-export class MapPageComponent implements OnInit {
-  leafletOptions!: MapOptions;
+export class MapPageComponent implements OnInit, AfterViewInit {
+  @ViewChild('leafletContainer', { static: true }) leafletContainer!: ElementRef;
+
   leafletMap!: LeafletMap;
   allMarkers: Marker[] = [];
   locations: Location[] = [];
   total = 0;
   discoveredIds = new Set<number>();
+
   get discovered() {
     return this.discoveredIds.size;
   }
@@ -45,8 +52,39 @@ export class MapPageComponent implements OnInit {
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
+    this.api.getLocations().subscribe((locs) => {
+      this.locations = locs;
+      this.total = locs.length;
 
-    this.leafletOptions = {
+      const bounds = new LatLngBounds([]);
+
+      this.allMarkers = locs.map((loc) => {
+        const m = marker([loc.latitude, loc.longitude], {
+          icon: icon({
+            iconSize: [25, 41],
+            iconAnchor: [13, 41],
+            iconUrl: this.chooseIcon(loc.type),
+            shadowUrl:
+              'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+          }),
+        }).bindPopup(`<strong>${loc.name}</strong><br>${loc.address}<br><small>${loc.description}</small>`)
+
+
+        bounds.extend(m.getLatLng());
+        return m;
+      });
+
+      setTimeout(() => {
+        if (this.leafletMap) {
+          this.allMarkers.forEach((mk) => mk.addTo(this.leafletMap));
+          this.leafletMap.fitBounds(bounds, { padding: [20, 20] });
+        }
+      }, 200); // dá tempo do mapa ter dimensão certa
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.leafletMap = L.map(this.leafletContainer.nativeElement, {
       center: latLng(-15.78, -47.93),
       zoom: 12,
       zoomControl: false,
@@ -60,39 +98,11 @@ export class MapPageComponent implements OnInit {
           attribution: '© OpenStreetMap contributors',
         }),
       ],
-    };
-
-    this.api.getLocations().subscribe((locs) => {
-      this.locations = locs;
-      this.total = locs.length;
-      const bounds = new LatLngBounds([]);
-
-      this.allMarkers = locs.map((loc) => {
-        const m = marker([loc.latitude, loc.longitude], {
-          icon: icon({
-            iconSize: [25, 41],
-            iconAnchor: [13, 41],
-            iconUrl: this.chooseIcon(loc.type),
-            shadowUrl:
-              'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-          }),
-        }).bindPopup(`<strong>${loc.name}</strong><br>${loc.address}`);
-        bounds.extend(m.getLatLng());
-        return m;
-      });
-
-
-      setTimeout(() => {
-        if (this.leafletMap) {
-          this.allMarkers.forEach((mk) => mk.addTo(this.leafletMap));
-          this.leafletMap.fitBounds(bounds, { padding: [20, 20] });
-        }
-      }, 0);
     });
-  }
 
-  onMapReady(map: LeafletMap) {
-    this.leafletMap = map;
+    setTimeout(() => {
+      this.leafletMap.invalidateSize();
+    }, 200);
   }
 
   chooseIcon(type: Location['type']): string {
@@ -121,7 +131,7 @@ export class MapPageComponent implements OnInit {
   resetMap() {
     if (!this.leafletMap) return;
 
-    this.leafletMap.setView(this.leafletOptions.center!, this.leafletOptions.zoom!);
+    this.leafletMap.setView(latLng(-15.78, -47.93), 12);
     this.allMarkers.forEach((mk) => mk.closePopup());
   }
 }
