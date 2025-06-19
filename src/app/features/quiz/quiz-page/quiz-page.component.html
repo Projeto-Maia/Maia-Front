@@ -1,0 +1,17 @@
+<ng-container *ngIf="currentQuestion; else loading">
+  <mat-progress-bar
+    mode="determinate"
+    [value]="((currentIndex + 1) / questions.length) * 100"
+  ></mat-progress-bar>
+
+  <div class="quiz-wrapper">
+    <app-question-card
+      [question]="currentQuestion"
+      (optionSelected)="handleOptionSelected($event)"
+    ></app-question-card>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <p style="text-align: center; padding: 2rem;">Carregando...</p>
+</ng-template>

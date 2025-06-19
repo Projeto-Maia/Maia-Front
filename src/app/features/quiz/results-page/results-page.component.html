@@ -1,0 +1,21 @@
+<section class="result-wrapper">
+  <mat-card class="result-card gradient-card">
+    <mat-card-title class="result-title">
+      {{ tituloFinal }}
+    </mat-card-title>
+    
+    <mat-card-content>
+      <p class="result-message">{{ mensagemFinal }}</p>
+      <p class="result-score">Acertos: {{ acertos }} de {{ total }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="result-actions">
+      <button mat-raised-button color="primary" (click)="reiniciarQuiz()">
+        Refazer quiz
+      </button>
+      <button mat-stroked-button color="accent" (click)="verMapa()">
+        Ver locais de apoio
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</section>
