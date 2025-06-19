@@ -1,0 +1,27 @@
+# Força LF como quebra de linha universal
+* text=auto eol=lf
+
+# Define arquivos de configuração como texto
+*.ts text
+*.html text
+*.scss text
+*.css text
+*.json text
+*.md text
+*.yml text
+*.yaml text
+
+# Binários (não aplicar conversão)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.ttf binary
+
+# Evita conversões indesejadas em arquivos lock
+package-lock.json text eol=lf
