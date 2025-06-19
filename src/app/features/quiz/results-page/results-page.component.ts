@@ -43,8 +43,9 @@ export class ResultsPageComponent {
   reiniciarQuiz() {
     this.router.navigate(['/quiz']);
   }
+  
+verMapa() {
+  this.router.navigate(['/mapa']);
+}
 
-  verMapa() {
-    this.router.navigate(['/mapa']);
-  }
 }

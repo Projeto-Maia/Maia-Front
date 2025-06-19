@@ -1,0 +1,32 @@
+<mat-card class="map-card">
+  <mat-card-header>
+    <div>
+      <mat-card-title>Locais de Apoio</mat-card-title>
+      <mat-card-subtitle>
+        <mat-icon inline>place</mat-icon>
+        {{ discovered }}/{{ total }} descobertos
+      </mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content class="controls">
+    <button
+      mat-stroked-button
+      *ngFor="let loc of locations"
+      (click)="focusLocation(loc)"
+    >
+      {{ loc.name }}
+    </button>
+    <button mat-flat-button color="warn" (click)="resetMap()">
+      Resetar
+    </button>
+  </mat-card-content>
+
+  <div
+    #leafletContainer
+    leaflet
+    (leafletMapReady)="onMapReady($event)"
+    [leafletOptions]="leafletOptions"
+    class="map-container"
+  ></div>
+</mat-card>

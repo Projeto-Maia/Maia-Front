@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 2rem;
+  background: linear-gradient(135deg, #fbe0f3 0%, #e8effd 100%);
+  min-height: 100dvh;
+}
+
+.map-card {
+  width: 90%;
+  max-width: 800px;
+  margin-top: 2rem;
+  background: linear-gradient(135deg, #fbe0f3 0%, #e8effd 100%);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-header {
+  text-align: center;
+  padding-bottom: 0.25rem;
+}
+
+mat-card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #3e1a46;
+}
+
+mat-card-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  color: #3e1a46;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.controls button {
+  flex: 1 1 auto;
+  min-width: 120px;
+  text-transform: none;
+}
+
+.map-container {
+  flex: 1 1 auto;
+  height: 60vh; 
+  border-radius: 0 0 1rem 1rem;
+  overflow: hidden;
+}
