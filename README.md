@@ -9,7 +9,7 @@
 
 ## 🌐 Sobre o Projeto
 
-Este repositório contém o **frontend em Angular** da plataforma [MAIA](https://github.com/SEU_USUARIO/maia), criada durante o hackathon da **Campus Party 2025** com o tema _"Mulher Mais Segura"_.
+Este repositório contém o **frontend em Angular** da plataforma [MAIA]([https://github.com/SEU_USUARIO/maia](https://github.com/Projeto-Maia/Maia-Front)), criada durante o hackathon da **Campus Party 2025** com o tema _"Mulher Mais Segura"_.
 
 A MAIA é uma plataforma que une **educação preventiva** e **acesso à ajuda geolocalizada** para mulheres em situação de violência no Distrito Federal.
 
@@ -54,7 +54,7 @@ A interface foi pensada para ser acolhedora, acessível e responsiva. Todo o con
 ## 🚀 Como Rodar o Projeto
 
 ```bash
-git clone https://github.com/SEU_USUARIO/maia.git
+git clone [https://github.com/Projeto-Maia/Maia-Front.git](https://github.com/Projeto-Maia/Maia-Front.git)
 cd maia
 
 npm install
