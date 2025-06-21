@@ -1,59 +1,124 @@
-# Maia
+<p align="center">
+  <img src="src/assets/logo_plum.svg" width="160" alt="Logotipo MAIA">
+</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+<h1 align="center">Frontend Web – MAIA</h1>
+<p align="center"><em>Interface web da plataforma MAIA – mulher de apoio e informação.</em></p>
 
-## Development server
+---
 
-To start a local development server, run:
+## 🌐 Sobre o Projeto
+
+Este repositório contém o **frontend em Angular** da plataforma [MAIA](https://github.com/SEU_USUARIO/maia), criada durante o hackathon da **Campus Party 2025** com o tema _"Mulher Mais Segura"_.
+
+A MAIA é uma plataforma que une **educação preventiva** e **acesso à ajuda geolocalizada** para mulheres em situação de violência no Distrito Federal.
+
+A interface foi pensada para ser acolhedora, acessível e responsiva. Todo o conteúdo e decisões visuais foram baseados em diretrizes de segurança digital e empatia no design.
+
+---
+
+## ✨ Funcionalidades
+
+- **Quiz Interativo** com 7 perguntas pedagógicas inspiradas no Formulário FRIDA (CNJ/CNMP).
+- **Tela de Resultado** com feedback baseado em red flags identificadas, sem score de risco.
+- **Mapa Interativo (Leaflet + OSM)** com filtros por tipo de serviço de apoio.
+- **Design Mobile-first** com foco em segurança, legibilidade e leveza.
+- **Progressive Web App (PWA Ready)**.
+- **Integração via API REST NestJS**.
+
+---
+
+## 🧑‍🎨 Experiência de Usuário (UX)
+
+- **Paleta de Cores Segura e Confortável**: tons suaves de rosa, lilás e azul claro.
+- **Tipografia Personalizada**: Work Sans, Montserrat.
+- **Feedback visual claro**: uso de ícones, destaques para respostas corretas/red flags.
+- **Logo MAIA presente para reforço de marca institucional e acolhimento.**
+
+---
+
+## 🧪 Tecnologias
+
+| Tecnologia        | Descrição |
+|-------------------|-----------|
+| Angular 20        | Framework principal da aplicação. |
+| Angular Material  | Biblioteca de UI utilizada com tema customizado. |
+| SCSS              | Estilização com variáveis, mixins e responsividade. |
+| Leaflet.js        | Mapa interativo e leve com OpenStreetMap. |
+| RxJS              | Observables e reatividade para consumo da API. |
+| Vite              | Build otimizado e ambiente de preview local. |
+| NestJS (API)      | Backend externo que serve dados para o frontend. |
+
+---
+
+## 🚀 Como Rodar o Projeto
 
 ```bash
-ng serve
+git clone https://github.com/SEU_USUARIO/maia.git
+cd maia
+
+npm install
+ng serve -o
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse: [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🌍 Estrutura de Pastas
 
-```bash
-ng generate component component-name
+```
+src/
+├── app/
+│   ├── core/             # Serviços (API, interfaces, helpers)
+│   ├── features/
+│   │   ├── home/         # Tela inicial
+│   │   ├── quiz/         # Componente do quiz
+│   │   ├── results/      # Tela de resultado 
+│   │   └── map/          # Tela com mapa de apoio
+│   └── assets/
+│       └── logo/         # Logotipo MAIA (svg)
+├── styles.scss           # Tema global e fontes
+└── index.html
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+## 📡 Integração com a API
+
+A API NestJS expõe os seguintes endpoints utilizados:
+
+| Método | Endpoint       | Utilização                |
+|--------|----------------|---------------------------|
+| GET    | `/quiz`        | Perguntas e explicações do quiz |
+| GET    | `/locations`   | Dados geolocalizados dos serviços de apoio |
+
+Variável de ambiente:
+```env
+VITE_API_URL=https://maia-back-production.up.railway.app
 ```
 
-## Building
+---
 
-To build the project run:
+## 📦 Deploy
 
-```bash
-ng build
-```
+| Plataforma | Status     |
+|------------|------------|
+| Netlify    | 🌐 Frontend Web |
+| Railway    | 🔌 API Backend  |
+| Expo (dev) | 📱 Protótipo mobile (React Native) |
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 📍 Equipe
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+| Nome    | Função             |
+|---------|--------------------|
+| Erick   | Frontend Developer |
+| Arthur  | Backend Developer  |
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<p align="center">
+  Feito com ❤️ para o Hackathon Campus Party 2025
+</p>
