@@ -5,37 +5,49 @@
   padding: 2rem;
   background: linear-gradient(135deg, #fbe0f3 0%, #e8effd 100%);
   min-height: 100dvh;
+  font-family: var(--font-regular);
+  overflow: hidden;
 }
 
 .map-card {
   width: 90%;
   max-width: 800px;
   margin-top: 2rem;
-  background: linear-gradient(135deg, #fbe0f3 0%, #e8effd 100%);
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
 }
 
-mat-card-header {
-  text-align: center;
-  padding-bottom: 0.25rem;
+.card-header {
+  background: #c9c9e3;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.maia-logo {
+  width: 80px;
+  margin-bottom: 0.75rem;
 }
 
 mat-card-title {
+  font-family: var(--font-bold);
   font-size: 1.75rem;
-  font-weight: 700;
-  color: #3e1a46;
+  color: #581845;
+  margin: 0;
 }
 
 mat-card-subtitle {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.25rem;
-  font-weight: 500;
-  color: #3e1a46;
+  margin-top: 0.25rem;
+  font-family: var(--font-regular);
+  font-size: 1rem;
+  color: #283956;
 }
 
 .controls {
@@ -43,23 +55,33 @@ mat-card-subtitle {
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   justify-content: center;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.6);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
+  padding: 1rem;
+  background: #f5c6d6;
+  border-bottom: 1px solid #e6e665;
+  transition: background 0.2s;
 
-.controls button {
-  flex: 1 1 auto;
-  min-width: 120px;
-  text-transform: none;
+  button {
+    flex: 1 1 auto;
+    min-width: 140px;
+    text-transform: none;
+    font-family: var(--font-regular);
+    font-weight: 400;
+    border-radius: 14px;
+    border-color: #283956;
+    color: #283956;
+  }
+
+  button.mat-flat-button {
+    background: #581845;
+    color: white;
+  }
 }
 
 .map-container {
   flex: 1 1 auto;
-  height: 60vh; 
+  height: 60vh;
   min-height: 400px;
   width: 100%;
-  display: block;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 14px 14px;
   overflow: hidden;
 }

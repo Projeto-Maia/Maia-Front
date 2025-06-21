@@ -1,6 +1,7 @@
 <mat-card class="map-card">
-  <mat-card-header>
-    <div>
+  <mat-card-header class="card-header">
+    <img src="assets/logo_plum.svg" alt="Logo MAIA" class="maia-logo" />
+    <div class="header-content">
       <mat-card-title>Locais de Apoio</mat-card-title>
       <mat-card-subtitle>
         <mat-icon inline>place</mat-icon>
@@ -17,10 +18,7 @@
     >
       {{ loc.name }}
     </button>
-    <button mat-flat-button color="warn" (click)="resetMap()">
-      Resetar
-    </button>
   </mat-card-content>
 
-<div #leafletContainer class="map-container"></div>
+  <div #leafletContainer class="map-container"></div>
 </mat-card>

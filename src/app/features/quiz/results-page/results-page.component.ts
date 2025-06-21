@@ -3,31 +3,65 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { QuizQuestion, QuizOption } from '../../../core/services/api.service';
+
+interface ResultadoItem {
+  pergunta: string;
+  respostaUsuario: QuizOption;
+  correta: boolean;
+  explicacao: string;
+}
 
 @Component({
   selector: 'app-results-page',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './results-page.component.html',
   styleUrls: ['./results-page.component.scss'],
 })
 export class ResultsPageComponent {
-  acertos = 0;
   total = 0;
-  mensagemFinal = '';
+  acertos = 0;
   tituloFinal = '';
+  mensagemFinal = '';
+
+  itens: ResultadoItem[] = [];
 
   constructor(private router: Router) {
-    const state = this.router.getCurrentNavigation()?.extras
-      .state as { acertos: number; total: number };
-    if (state) {
-      this.acertos = state.acertos;
-      this.total = state.total;
+    const nav = this.router.getCurrentNavigation()?.extras.state as {
+      questions: QuizQuestion[];
+      selectedAnswers: Record<number, string>;
+      acertos: number;
+      total: number;
+    };
+
+    if (!nav) {
+      this.router.navigate(['/']);
+      return;
     }
+
+    this.total = nav.total;
+    this.acertos = nav.acertos;
+
+    this.itens = nav.questions.map((q) => {
+      const respostaUsuarioId = nav.selectedAnswers[q.id];
+      const respostaUsuario = q.options.find(
+        (o) => o.id === respostaUsuarioId
+      )!;
+
+      return {
+        pergunta: q.questionText,
+        respostaUsuario,
+        correta: respostaUsuarioId === q.correctOptionId,
+        explicacao: q.explanation,
+      };
+    });
+
     this.definirMensagem();
   }
 
-  definirMensagem() {
+  private definirMensagem(): void {
     const pct = this.total ? this.acertos / this.total : 0;
     if (pct >= 0.7) {
       this.tituloFinal = 'Parabéns!';
@@ -40,12 +74,11 @@ export class ResultsPageComponent {
     }
   }
 
-  reiniciarQuiz() {
+  reiniciarQuiz(): void {
     this.router.navigate(['/quiz']);
   }
-  
-verMapa() {
-  this.router.navigate(['/mapa']);
-}
 
+  verMapa(): void {
+    this.router.navigate(['/mapa']);
+  }
 }

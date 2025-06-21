@@ -1,21 +1,60 @@
 <section class="result-wrapper">
-  <mat-card class="result-card gradient-card">
-    <mat-card-title class="result-title">
-      {{ tituloFinal }}
-    </mat-card-title>
-    
-    <mat-card-content>
-      <p class="result-message">{{ mensagemFinal }}</p>
-      <p class="result-score">Acertos: {{ acertos }} de {{ total }}</p>
-    </mat-card-content>
+  <mat-card class="result-card">
+    <img src="assets/logo_plum.svg" alt="Logo MAIA" class="logo" />
 
-    <mat-card-actions class="result-actions">
+    <h2 class="result-title">{{ tituloFinal }}</h2>
+    <p class="result-message">{{ mensagemFinal }}</p>
+    <p class="result-score">Acertos: {{ acertos }} de {{ total }}</p>
+
+    <div class="result-list">
+      <div
+        *ngFor="let item of itens"
+        class="result-item"
+        [class.correct]="item.correta"
+        [class.wrong]="!item.correta"
+      >
+        <div class="status-icon" [ngClass]="item.correta ? 'correct' : 'wrong'">
+          <svg
+            *ngIf="item.correta"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+            />
+          </svg>
+          <svg
+            *ngIf="!item.correta"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 
+         10-10S17.52 2 12 2zm0 15h-1v-1h1v1zm0-3h-1V7h1v7z"
+            />
+          </svg>
+        </div>
+
+        <div class="texto">
+          <p class="pergunta">{{ item.pergunta }}</p>
+          <p>
+            Sua resposta:
+            <strong>{{ item.respostaUsuario.text }}</strong>
+          </p>
+          <p class="explicacao">{{ item.explicacao }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-actions">
       <button mat-raised-button color="primary" (click)="reiniciarQuiz()">
         Refazer quiz
       </button>
       <button mat-stroked-button color="accent" (click)="verMapa()">
         Ver locais de apoio
       </button>
-    </mat-card-actions>
+    </div>
   </mat-card>
 </section>

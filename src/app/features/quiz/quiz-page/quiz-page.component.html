@@ -1,17 +1,41 @@
-<ng-container *ngIf="currentQuestion; else loading">
-  <mat-progress-bar
-    mode="determinate"
-    [value]="((currentIndex + 1) / questions.length) * 100"
-  ></mat-progress-bar>
+<header class="quiz-header">
+  <img src="assets/logo_plum.svg" alt="Logo MAIA" class="logo" />
+  <span class="quiz-title">Quiz Maia</span>
+</header>
 
-  <div class="quiz-wrapper">
-    <app-question-card
-      [question]="currentQuestion"
-      (optionSelected)="handleOptionSelected($event)"
-    ></app-question-card>
+<div class="quiz-container">
+  <div class="progress-wrapper">
+    <div
+      class="progress-step"
+      *ngFor="let _ of questions; index as i"
+      [class.active]="i <= currentIndex"
+    ></div>
   </div>
-</ng-container>
 
-<ng-template #loading>
-  <p style="text-align: center; padding: 2rem;">Carregando...</p>
-</ng-template>
+  <app-question-card
+    *ngIf="currentQuestion"
+    [question]="currentQuestion"
+    [selectedId]="selectedIdForCurrentQuestion"
+    (optionSelected)="handleOptionSelected($event)"
+  ></app-question-card>
+
+  <div class="nav-buttons">
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="prev()"
+      [disabled]="currentIndex === 0"
+    >
+      ← Anterior
+    </button>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="next()"
+      [disabled]="!answeredCurrent"
+    >
+      {{ currentIndex === questions.length - 1 ? "Finalizar" : "Próximo →" }}
+    </button>
+  </div>
+</div>

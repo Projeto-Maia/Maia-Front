@@ -1,15 +1,17 @@
-<mat-card class="question-card gradient-card">
+<mat-card class="question-card">
   <h3 class="question-title">{{ question.questionText }}</h3>
-  <ul class="option-list">
-    <li *ngFor="let option of question.options">
-      <button
-        mat-stroked-button
-        color="primary"
-        class="option-btn"
-        (click)="selectOption(option)"
-      >
-        {{ option.text }}
-      </button>
-    </li>
-  </ul>
+
+  <mat-radio-group
+    class="option-group"
+    [value]="selectedId"
+    (change)="onSelectionChange($event.value)"
+  >
+    <mat-radio-button
+      *ngFor="let opt of question.options"
+      class="option-btn"
+      [value]="opt.id"
+    >
+      {{ opt.text }}
+    </mat-radio-button>
+  </mat-radio-group>
 </mat-card>

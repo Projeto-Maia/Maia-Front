@@ -1,11 +1,36 @@
-html, body {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Work+Sans:wght@400&display=swap");
+
+:root {
+  --font-regular: "Work Sans", sans-serif;
+  --font-bold: "Montserrat", sans-serif;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: auto; 
+  overflow-x: hidden;
+  font-family: var(--font-regular);
 }
 
-body {
-  font-family: Roboto, sans-serif;
-  background: #fafafa;
+button.mat-stroked-button .mat-button-wrapper,
+button.mat-stroked-button,
+.mat-radio-button .mat-radio-label-content {
+  font-family: var(--font-regular) !important;
+  font-weight: 400 !important;
+}
+
+.quiz-title,
+.question-title {
+  font-family: var(--font-bold) !important;
+  font-weight: 600 !important;
+}
+
+.mat-mdc-card,
+button.mat-mdc-button-base,
+.mat-mdc-raised-button,
+.mat-mdc-stroked-button,
+.mat-mdc-radio-button {
+  border-radius: 14px !important;
 }
