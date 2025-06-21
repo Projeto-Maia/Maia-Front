@@ -54,8 +54,8 @@ A interface foi pensada para ser acolhedora, acessível e responsiva. Todo o con
 ## 🚀 Como Rodar o Projeto
 
 ```bash
-git clone [https://github.com/Projeto-Maia/Maia-Front.git](https://github.com/Projeto-Maia/Maia-Front.git)
-cd maia
+git clone https://github.com/Projeto-Maia/Maia-Front.git
+cd Maia-Front
 
 npm install
 ng serve -o
