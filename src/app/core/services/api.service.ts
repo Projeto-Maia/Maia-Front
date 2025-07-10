@@ -31,7 +31,7 @@ export interface Location {
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly BASE_URL = 'https://maia-back-production.up.railway.app';
+  private readonly BASE_URL = 'https://maia-back.onrender.com';
 
   constructor(private http: HttpClient) {}
 
